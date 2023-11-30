@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'data.dart';
 import 'the_drawer.dart';
+import 'screen_group.dart';
 
 class ScreenListGroups extends StatefulWidget {
   List<UserGroup> userGroups;
@@ -11,6 +12,7 @@ class ScreenListGroups extends StatefulWidget {
   @override
   State<ScreenListGroups> createState() => _ScreenListGroupsState();
 }
+
 
 class _ScreenListGroupsState extends State<ScreenListGroups> {
   late List<UserGroup> userGroups;
@@ -27,7 +29,6 @@ class _ScreenListGroupsState extends State<ScreenListGroups> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          // TODO: assign names like New group 1, New group 2...
           UserGroup newUserGroup = UserGroup(
               Data.defaultName,
               Data.defaultDescription,
@@ -60,7 +61,14 @@ class _ScreenListGroupsState extends State<ScreenListGroups> {
     return ListTile(
       title: Text(userGroup.name),
       trailing: Text('${userGroup.users.length}'),
-      onTap: () {},
-    );
+      onTap: () => Navigator.of(context)
+        .push(MaterialPageRoute<void>(
+          builder: (context) => ScreenGroup(userGroup: userGroup)),
+        )
+        .then((var v) => setState(() {})),
+        );
   }
+  
+
+  
 }
